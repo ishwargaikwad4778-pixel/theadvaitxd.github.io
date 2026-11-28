@@ -122,49 +122,33 @@
     siteLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{siteLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
-  <!-- ================= ADVAITBOT FINAL v7 - WITH TOP BAR ================= -->
-<!-- Paste this whole block just before </body> in your index.html -->
+  <!-- ================= ADVAITBOT v9 FINAL - GREEN MARBLE + ALL FIXES ================= -->
 <style>
-/* ===== TOP BAR - NEW ===== */
-#advaitbot-topbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  background: #000; color: #fff;
-  padding: 10px 14px; text-align: center;
-  font-family: sans-serif; font-size: 14px;
-  display: flex; justify-content: center; align-items: center; gap: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-}
-#advaitbot-topbar b { color: #5865F2; }
+#advaitbot-topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: #000; background-image: radial-gradient(ellipse at 20% 20%, rgba(0,255,136,0.25) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(0,200,83,0.20) 0%, transparent 50%), radial-gradient(ellipse at 50% 90%, rgba(0,255,136,0.15) 0%, transparent 60%); color: #fff; padding: 10px 14px; text-align: center; font-family: sans-serif; font-size: 14px; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 2px 15px rgba(0,255,136,0.3); border-bottom: 1px solid rgba(0,255,136,0.4); }
+#advaitbot-topbar b { color: #00FF88; }
 #advaitbot-topbar-close { cursor: pointer; font-size: 16px; opacity: 0.7; margin-left: 6px; }
 #advaitbot-topbar.hidden { display: none; }
-/* Push your site down a little so bar doesn't cover it */
 body { padding-top: 38px !important; }
 body.advaitbot-bar-hidden { padding-top: 0 !important; }
-
-/* ===== BOT BUTTON + BOX ===== */
-#advaitbot-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; border: none; background: #5865F2; color: white; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-#advaitbot-box { display: none; position: fixed; bottom: 90px; right: 20px; z-index: 9999; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background: #1a1a1a; border-radius: 16px; overflow: hidden; flex-direction: column; box-shadow: 0 8px 30px rgba(0,0,0,0.4); font-family: sans-serif; }
+#advaitbot-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 62px; height: 62px; border-radius: 50%; border: 2px solid #00FF88; background: #000; background-image: radial-gradient(circle at 30% 30%, rgba(0,255,136,0.6) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(0,200,83,0.5) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #0a2e1a 0%, #000 70%); color: white; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,255,136,0.4), 0 0 15px rgba(0,255,136,0.2); }
+#advaitbot-box { display: none; position: fixed; bottom: 90px; right: 20px; z-index: 9999; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background: #050505; background-image: radial-gradient(ellipse at 15% 10%, rgba(0,255,136,0.18) 0%, transparent 45%), radial-gradient(ellipse at 85% 25%, rgba(0,200,83,0.12) 0%, transparent 40%), radial-gradient(ellipse at 30% 85%, rgba(0,255,136,0.10) 0%, transparent 50%), radial-gradient(ellipse at 90% 90%, rgba(0,200,83,0.08) 0%, transparent 40%); border: 1px solid rgba(0,255,136,0.4); border-radius: 16px; overflow: hidden; flex-direction: column; box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 20px rgba(0,255,136,0.15); font-family: sans-serif; }
 #advaitbot-box.open { display: flex; }
-#advaitbot-header { background: #5865F2; color: white; padding: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-#advaitbot-header small { display: block; font-weight: normal; opacity: 0.8; font-size: 12px; }
+#advaitbot-header { background: #000; background-image: radial-gradient(ellipse at 20% 20%, rgba(0,255,136,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(0,200,83,0.25) 0%, transparent 60%); color: white; padding: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,255,136,0.4); }
+#advaitbot-header small { display: block; font-weight: normal; opacity: 0.8; font-size: 12px; color: #00FF88; }
 #advaitbot-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .ab-msg { padding: 10px 12px; border-radius: 12px; max-width: 85%; font-size: 14px; line-height: 1.4; white-space: pre-line; }
-.ab-bot { background: #2a2a2a; color: white; align-self: flex-start; }
-.ab-user { background: #5865F2; color: white; align-self: flex-end; }
+.ab-bot { background: #0a0a0a; background-image: radial-gradient(ellipse at 20% 20%, rgba(0,255,136,0.15) 0%, transparent 60%); color: #eafff3; align-self: flex-start; border: 1px solid rgba(0,255,136,0.25); }
+.ab-user { background: #00C853; background-image: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.25) 0%, transparent 60%); color: white; align-self: flex-end; }
 #advaitbot-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
-.ab-quick { background: #2a2a2a; color: white; border: 1px solid #444; border-radius: 20px; padding: 6px 12px; font-size: 12px; cursor: pointer; }
-#advaitbot-input-row { display: flex; padding: 10px; gap: 8px; border-top: 1px solid #333; }
-#advaitbot-input { flex: 1; padding: 10px; border-radius: 20px; border: none; background: #2a2a2a; color: white; outline: none; }
-#advaitbot-send { background: #5865F2; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; }
+.ab-quick { background: #0a0a0a; color: #00FF88; border: 1px solid rgba(0,255,136,0.5); border-radius: 20px; padding: 6px 12px; font-size: 12px; cursor: pointer; }
+.ab-quick:hover { background: #00C853; color: white; }
+#advaitbot-input-row { display: flex; padding: 10px; gap: 8px; border-top: 1px solid rgba(0,255,136,0.3); background: #000; }
+#advaitbot-input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid rgba(0,255,136,0.4); background: #0a0a0a; color: white; outline: none; }
+#advaitbot-input::placeholder { color: #888; }
+#advaitbot-send { background: #00C853; background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 60%); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; box-shadow: 0 0 10px rgba(0,255,136,0.4); }
 </style>
 
-<!-- TOP BAR -->
-<div id="advaitbot-topbar">
-  <span>🤖 Try typing <b>"how to join AdvaitMC"</b> in AdvaitBot below</span>
-  <span id="advaitbot-topbar-close" onclick="hideAdvaitBotTopBar()">✕</span>
-</div>
-
-<!-- BOT -->
+<div id="advaitbot-topbar"><span>🤖 Try typing <b>"how to join AdvaitMC"</b> in AdvaitBot below</span><span id="advaitbot-topbar-close" onclick="hideAdvaitBotTopBar()">✕</span></div>
 <button id="advaitbot-btn" onclick="toggleAdvaitBot()">🤖</button>
 <div id="advaitbot-box">
   <div id="advaitbot-header"><div>AdvaitBot 🤖<small>Chill helper for AdvaitMC</small></div><span onclick="toggleAdvaitBot()" style="cursor:pointer">✕</span></div>
@@ -185,6 +169,8 @@ body.advaitbot-bar-hidden { padding-top: 0 !important; }
 
 <script>
 const ADVAITBOT_BRAIN = [
+// ======== RULE-BREAKING - MUST BE FIRST ========
+{ keywords: ["18+", "18 plus", "nsfw", "porn", "sex", "nude", "nudes", "horny", "onlyfans", "harm", "hurt people", "kill", "threat", "threaten", "suicide", "self harm", "self-harm", "rape", "abuse", "bully", "toxic", "swear", "gaali", "spam", "advertise", "advertising", "hack", "cheat", "grief"], q: "Rule breaking?", a: "Nope, read these rules... 📜\n\n🚫 No NSFW / 18+ stuff - Instant Mute or Kick, Repeat = Ban\n⚠️ No Threats / Harming people - Instant Ban\n🤬 No Excessive Swearing - Warn → Mute → Kick\n🤝 No Toxicity / Disrespect - Warn → Mute → Kick\n🔗 No Advertising / Random Links - Delete + Warn → Mute → Kick\n🚫 No Spamming - Warn → Mute → Kick\n\nIf you do any of that, staff will handle it. Staff decisions are final.\n\nWant full rules? Just type 'rules'" },
 { keywords: ["discord", "join discord", "invite", "discord link", "info page"], q: "How to join Discord?", a: "No stress, easy one!\nTo join our Discord:\n1. On this website, go to top bar\n2. Click the 4th option 'Info'\n3. Click 'Discord ↗️'\nIt will take you straight to our server." },
 { keywords: ["rule", "rules", "punishment", "punish", "ban", "mute", "kick", "warn"], q: "What are rules?", a: "Chill, here are the rules 📜\n\n🚫 Spamming / Flooding → 1st: Warn, 2nd: 10m Mute, 3rd: 1h Mute, 4th: Kick\n\n📢 Unnecessary Pings (@everyone/@here spam) → 1st: Warn, 2nd: 30m Mute, 3rd: 1d Mute\n\n🤝 Toxicity / Disrespect → 1st: Warn, 2nd: 1h Mute, 3rd: 1d Mute, 4th: Kick\n\n🤬 Excessive Swearing → 1st: Warn, 2nd: 10m Mute, 3rd: 1h Mute, 4th: Kick\n\n🔗 Advertising / Random Links → 1st: Delete + Warn, 2nd: 1h Mute, 3rd: Kick\n\n🔞 NSFW Content → Instant 1d Mute or Kick, Repeat: Ban\n\n⚠️ Threats / Harmful Behavior → Instant Ban\n\n🚨 Self-harm Threats / Jokes → Instant Mute + Staff Review\n\n🎫 Ticket Spam / Application Spam → 1st: Warn, 2nd: 1h Mute, 3rd: Kick\n\n⚙️ Bypassing Punishments (alt accounts) → Instant Ban\n\n🚫 No NSFW memes, sexual jokes, explicit or shock content → Delete + Mute → Kick / Ban\n\n😂 Dark humor is allowed only if it doesn't break other rules!\n\n📘 Saying 'I never read the rules' is NOT an excuse.\n\n👑 Staff decisions are final." },
 { keywords: ["ticket", "support", "help", "problem", "issue", "report"], q: "How to make a ticket?", a: "Easy!\n1. Go to #create-a-ticket in 'Support...' Section\n2. Click on 'create a tick'\n3. Describe your problem and hit 'submit'\nIt will make a private channel with you and the staff. Just wait for someone to reply." },
@@ -196,8 +182,8 @@ const ADVAITBOT_BRAIN = [
 { keywords: ["discord help", "discord commands", "bolt bot"], q: "Discord Help?", a: "💥 DISCORD HELP:\n@Bolt Bot AI - Chat with Bolt - Example: @Bolt hello\n/suggest - Submit suggestion - Example: /suggest add pvp\ntickets - Go in #create-a-ticket\napply for mod - Go in #Apply-for-mod\n/fun 8ball - Example: /fun 8ball will i win?\n/rate - Rate anything" },
 { keywords: ["ip", "server ip", "address", "what is ip", "join ip"], q: "What is Server IP?", a: "So the IP is Not configured yet.\nWe are paused for Season 2 right now. The new IP will be shared on Discord + this website when Season 2 starts. Join Discord to get it first!" },
 { keywords: ["join", "how to join", "how to play", "play minecraft", "connect", "multiplayer"], q: "How to join Minecraft?", a: "Super easy, chill:\n1. Open Minecraft\n2. Go to Multiplayer\n3. Click Add Server\n4. Paste our IP in IP bar (Not configured yet - coming in Season 2)\n5. Paste 'AdvaitMC' in Name bar\n6. Hit Enter and Play!\n\nFor Bedrock / Phone, ask me 'How to join on phone?'" },
-{ keywords: ["bedrock", "phone", "mobile", "pe", "pocket", "console", "xbox", "ps4", "ps5"], q: "How to join on Bedrock / Phone?", a: "For Bedrock / Phone:\n1. Go to Play\n2. Go to Servers\n3. Scroll down to Add Servers / My Servers\n4. Put IP [Not configured yet] in IP bar\n5. Put 'AdvaitMC' in Name bar\n6. Put Port as default\n7. Hit Save and Join!" },
-{ keywords: ["version", "which version", "what version", "1.21", "latest", "update"], q: "What version?", a: "We use the Latest Version.\nAnd we use special plugins so old version AND new version players can still join even if the server delays to be updated. So no worry about version, just join with what you have!" },
+{ keywords: ["bedrock", "phone", "mobile", "pocket edition", "console", "xbox", "ps4", "ps5"], q: "How to join on Bedrock / Phone?", a: "For Bedrock / Phone:\n1. Go to Play\n2. Go to Servers\n3. Scroll down to Add Servers / My Servers\n4. Put IP [Not configured yet] in IP bar\n5. Put 'AdvaitMC' in Name bar\n6. Put Port as default\n7. Hit Save and Join!" },
+{ keywords: ["version", "which version", "what version", "latest", "update"], q: "What version?", a: "We use the Latest Version.\nAnd we use special plugins so old version AND new version players can still join even if the server delays to be updated. So no worry about version, just join with what you have!" },
 { keywords: ["gamemode", "gamemodes", "modes", "what can i play", "survival", "lifesteal", "skyblock", "oneblock", "parkour", "tnt", "head steal"], q: "What gamemodes?", a: "We have a lot:\n⚔️ Survival\n❤️ Lifesteal\n🧱 OneBlock\n☁️ SkyBlock\n🏃 Parkour\n💥 TNT Run\n💀 Head Steal" },
 { keywords: ["money", "rich", "richest", "economy", "earn money", "giveaway", "giveaways"], q: "What is AdvaitMC about?", a: "Simple - earn money and be the richest player!\nWith giveaways and events, jobs, shops, auction house and more. Grind, trade, win events and climb to #1 richest!" },
 { keywords: ["online", "is server online", "is server up", "is server down", "paused", "status"], q: "Is server online?", a: "Right now the server is PAUSED for Season 2 ⏸️\nWe are rebuilding everything bigger and better. Join Discord to know when it starts - you don't want to miss Day 1!" },
@@ -219,7 +205,7 @@ const ADVAITBOT_BRAIN = [
 { keywords: ["suggest", "suggestion", "suggestions", "idea", "ideas", "suggest idea"], q: "How to suggest ideas?", a: "To suggest ideas:\n1. Go to any channel where you have permission to type in Discord\n2. Type /Suggest and hit Enter\n3. A form will pop up - fill in your idea there and hit Enter\n\nYour idea will go to the #Suggestion channel to be voted on!" },
 { keywords: ["giveaway", "giveaways", "free", "prize", "prizes", "win"], q: "How to join giveaways?", a: "🎁 To join giveaways:\nGo to #Giveaway channel in our Discord in the Important category.\nAll the information on how to enter will be provided there itself. Good luck!" },
 { keywords: ["announcement", "announcements", "news", "updates"], q: "Where are announcements?", a: "Keep your eyes on #Announcement channel in 'Important' category in Discord for all events, updates, and news!" },
-{ keywords: ["joke", "funny", "make me laugh", "tell me something funny"], q: "Tell me a joke", a: "Okay chill one 😄\n\nWhy did the Creeper go to therapy?\nBecause he had too many explosive emotions! 💥\n\nWant another? Just say 'another joke'" },
+{ keywords: ["joke", "funny", "make me laugh"], q: "Tell me a joke", a: "Okay chill one 😄\n\nWhy did the Creeper go to therapy?\nBecause he had too many explosive emotions! 💥\n\nWant another? Just say 'another joke'" },
 { keywords: ["another joke", "one more joke", "more joke"], q: "Another joke", a: "Haha okay 😄\n\nWhy is AdvaitMC the richest server?\nBecause even the Trainees are stacking diamonds while you are still looking for your home! /home create base 😂" },
 { keywords: ["are you real", "are you ai", "are you human", "are you robot"], q: "Are you real AI?", a: "Haha, I'm AdvaitBot - chill helper bot for AdvaitMC.\nI'm not a big AI like ChatGPT, I just know everything about AdvaitMC. But I try my best to be chill like Advait 😎" },
 { keywords: ["thank", "thanks", "thank you", "thx", "nice", "cool", "awesome", "great"], q: "Thanks", a: "Anytime! Chill 😎\nIf you need anything else about AdvaitMC, just ask me. And join Discord - that's where all the fun is!" },
@@ -232,38 +218,32 @@ const ADVAITBOT_JOKES = [
   "What do you call a fake noodle? An Impasta! ...okay that one wasn't Minecraft, my bad 😅",
   "Why is /rtp the best command? Because even AdvaitBot doesn't know where you will land! 😂"
 ];
-
-// ===== TOP BAR LOGIC - NEW =====
-function hideAdvaitBotTopBar(){
-  const bar = document.getElementById('advaitbot-topbar');
-  if(bar){ bar.classList.add('hidden'); document.body.classList.add('advaitbot-bar-hidden'); }
-}
-// Hide bar on ANY key press - even just Spacebar
-document.addEventListener('keydown', function(){
-  hideAdvaitBotTopBar();
-});
-// Also hide if they click the bot button
-const _origToggle = toggleAdvaitBot;
-
+function hideAdvaitBotTopBar(){ const bar=document.getElementById('advaitbot-topbar'); if(bar){ bar.classList.add('hidden'); document.body.classList.add('advaitbot-bar-hidden'); } }
+document.addEventListener('keydown', function(){ hideAdvaitBotTopBar(); });
 function toggleAdvaitBot(){ const box=document.getElementById('advaitbot-box'); box.classList.toggle('open'); if(box.classList.contains('open') && document.getElementById('advaitbot-messages').innerHTML===''){ addAdvaitBotMsg("Hey! I'm AdvaitBot 🤖 Chill helper for AdvaitMC.\nAsk me anything - How to Join, Team, Events, Rules, or just say 'Tell me a joke'!", 'bot'); } }
 function addAdvaitBotMsg(text, who){ const div=document.createElement('div'); div.className='ab-msg ab-'+who; div.textContent=text; const box=document.getElementById('advaitbot-messages'); box.appendChild(div); box.scrollTop=box.scrollHeight; }
 function findAdvaitBotAnswer(input){
-  const lower=input.toLowerCase();
-  if(lower.includes("joke") || lower.includes("funny")){ return ADVAITBOT_JOKES[Math.floor(Math.random()*ADVAITBOT_JOKES.length)] + "\n\nWant another? Just say 'joke' again!"; }
+  const lower = " " + input.toLowerCase().replace(/[?!.,]/g," ") + " ";
+  const clean = lower.replace(/\s+/g," ");
+  if(clean.includes(" joke ") || clean.includes(" funny ")) { return ADVAITBOT_JOKES[Math.floor(Math.random()*ADVAITBOT_JOKES.length)] + "\n\nWant another? Just say 'joke' again!"; }
   let best=null, bestScore=0;
   for(const item of ADVAITBOT_BRAIN){
     let score=0;
-    for(const k of item.keywords){ if(lower.includes(k)) score+=k.length; }
+    for(const k of item.keywords){
+      const kw = " " + k.toLowerCase() + " ";
+      if(clean.includes(kw)) score += k.length * 2;
+      else if(clean.trim() === k.toLowerCase()) score += 20;
+    }
     if(score>bestScore){ bestScore=score; best=item; }
   }
   if(best) return best.a;
   const offTopicWords = ["weather","cricket","football","math","homework","girlfriend","boyfriend","politics","movie","song","cooking","school"];
-  for(const w of offTopicWords){ if(lower.includes(w)) return "Your question should be related to AdvaitMC. If you think it was then we have saved it for improvement."; }
+  for(const w of offTopicWords){ if(clean.includes(" "+w+" ")) return "Your question should be related to AdvaitMC. If you think it was then we have saved it for improvement."; }
   return "I do not have an appropriate answer for that question tho I have saved your question for improvement.\n\nTry asking about: How to Join, Season 2, Team, Events, Giveaways, Rules, Ticket, Mod, or Commands.";
 }
 function askAdvaitBot(text){ addAdvaitBotMsg(text,'user'); const ans=findAdvaitBotAnswer(text); setTimeout(()=>addAdvaitBotMsg(ans,'bot'),400); }
 function sendAdvaitBot(){ const inp=document.getElementById('advaitbot-input'); const text=inp.value.trim(); if(!text) return; inp.value=''; askAdvaitBot(text); }
 </script>
-<!-- ================= END ADVAITBOT FINAL v7 ================= -->
+<!-- ================= END ADVAITBOT v9 ================= -->
 </body>
 </html>
