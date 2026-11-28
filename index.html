@@ -122,5 +122,148 @@
     siteLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{siteLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
+  <!-- ================= ADVAITBOT FINAL v7 - WITH TOP BAR ================= -->
+<!-- Paste this whole block just before </body> in your index.html -->
+<style>
+/* ===== TOP BAR - NEW ===== */
+#advaitbot-topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: #000; color: #fff;
+  padding: 10px 14px; text-align: center;
+  font-family: sans-serif; font-size: 14px;
+  display: flex; justify-content: center; align-items: center; gap: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+#advaitbot-topbar b { color: #5865F2; }
+#advaitbot-topbar-close { cursor: pointer; font-size: 16px; opacity: 0.7; margin-left: 6px; }
+#advaitbot-topbar.hidden { display: none; }
+/* Push your site down a little so bar doesn't cover it */
+body { padding-top: 38px !important; }
+body.advaitbot-bar-hidden { padding-top: 0 !important; }
+
+/* ===== BOT BUTTON + BOX ===== */
+#advaitbot-btn { position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; border: none; background: #5865F2; color: white; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+#advaitbot-box { display: none; position: fixed; bottom: 90px; right: 20px; z-index: 9999; width: 350px; max-width: 90vw; height: 500px; max-height: 70vh; background: #1a1a1a; border-radius: 16px; overflow: hidden; flex-direction: column; box-shadow: 0 8px 30px rgba(0,0,0,0.4); font-family: sans-serif; }
+#advaitbot-box.open { display: flex; }
+#advaitbot-header { background: #5865F2; color: white; padding: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+#advaitbot-header small { display: block; font-weight: normal; opacity: 0.8; font-size: 12px; }
+#advaitbot-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.ab-msg { padding: 10px 12px; border-radius: 12px; max-width: 85%; font-size: 14px; line-height: 1.4; white-space: pre-line; }
+.ab-bot { background: #2a2a2a; color: white; align-self: flex-start; }
+.ab-user { background: #5865F2; color: white; align-self: flex-end; }
+#advaitbot-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
+.ab-quick { background: #2a2a2a; color: white; border: 1px solid #444; border-radius: 20px; padding: 6px 12px; font-size: 12px; cursor: pointer; }
+#advaitbot-input-row { display: flex; padding: 10px; gap: 8px; border-top: 1px solid #333; }
+#advaitbot-input { flex: 1; padding: 10px; border-radius: 20px; border: none; background: #2a2a2a; color: white; outline: none; }
+#advaitbot-send { background: #5865F2; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; }
+</style>
+
+<!-- TOP BAR -->
+<div id="advaitbot-topbar">
+  <span>🤖 Try typing <b>"how to join AdvaitMC"</b> in AdvaitBot below</span>
+  <span id="advaitbot-topbar-close" onclick="hideAdvaitBotTopBar()">✕</span>
+</div>
+
+<!-- BOT -->
+<button id="advaitbot-btn" onclick="toggleAdvaitBot()">🤖</button>
+<div id="advaitbot-box">
+  <div id="advaitbot-header"><div>AdvaitBot 🤖<small>Chill helper for AdvaitMC</small></div><span onclick="toggleAdvaitBot()" style="cursor:pointer">✕</span></div>
+  <div id="advaitbot-messages"></div>
+  <div id="advaitbot-quick">
+    <button class="ab-quick" onclick="askAdvaitBot('How to join Minecraft?')">How to join?</button>
+    <button class="ab-quick" onclick="askAdvaitBot('When is Season 2?')">Season 2?</button>
+    <button class="ab-quick" onclick="askAdvaitBot('Tell me a joke')">Tell me a joke</button>
+    <button class="ab-quick" onclick="askAdvaitBot('Events')">Events</button>
+    <button class="ab-quick" onclick="askAdvaitBot('Who is the team?')">Team</button>
+    <button class="ab-quick" onclick="askAdvaitBot('Rules')">Rules</button>
+  </div>
+  <div id="advaitbot-input-row">
+    <input id="advaitbot-input" placeholder="Ask AdvaitBot..." onkeydown="if(event.key==='Enter') sendAdvaitBot()" />
+    <button id="advaitbot-send" onclick="sendAdvaitBot()">➤</button>
+  </div>
+</div>
+
+<script>
+const ADVAITBOT_BRAIN = [
+{ keywords: ["discord", "join discord", "invite", "discord link", "info page"], q: "How to join Discord?", a: "No stress, easy one!\nTo join our Discord:\n1. On this website, go to top bar\n2. Click the 4th option 'Info'\n3. Click 'Discord ↗️'\nIt will take you straight to our server." },
+{ keywords: ["rule", "rules", "punishment", "punish", "ban", "mute", "kick", "warn"], q: "What are rules?", a: "Chill, here are the rules 📜\n\n🚫 Spamming / Flooding → 1st: Warn, 2nd: 10m Mute, 3rd: 1h Mute, 4th: Kick\n\n📢 Unnecessary Pings (@everyone/@here spam) → 1st: Warn, 2nd: 30m Mute, 3rd: 1d Mute\n\n🤝 Toxicity / Disrespect → 1st: Warn, 2nd: 1h Mute, 3rd: 1d Mute, 4th: Kick\n\n🤬 Excessive Swearing → 1st: Warn, 2nd: 10m Mute, 3rd: 1h Mute, 4th: Kick\n\n🔗 Advertising / Random Links → 1st: Delete + Warn, 2nd: 1h Mute, 3rd: Kick\n\n🔞 NSFW Content → Instant 1d Mute or Kick, Repeat: Ban\n\n⚠️ Threats / Harmful Behavior → Instant Ban\n\n🚨 Self-harm Threats / Jokes → Instant Mute + Staff Review\n\n🎫 Ticket Spam / Application Spam → 1st: Warn, 2nd: 1h Mute, 3rd: Kick\n\n⚙️ Bypassing Punishments (alt accounts) → Instant Ban\n\n🚫 No NSFW memes, sexual jokes, explicit or shock content → Delete + Mute → Kick / Ban\n\n😂 Dark humor is allowed only if it doesn't break other rules!\n\n📘 Saying 'I never read the rules' is NOT an excuse.\n\n👑 Staff decisions are final." },
+{ keywords: ["ticket", "support", "help", "problem", "issue", "report"], q: "How to make a ticket?", a: "Easy!\n1. Go to #create-a-ticket in 'Support...' Section\n2. Click on 'create a tick'\n3. Describe your problem and hit 'submit'\nIt will make a private channel with you and the staff. Just wait for someone to reply." },
+{ keywords: ["mod", "apply", "staff", "become mod", "application", "interview", "admin", "appy", "builder"], q: "How to apply for mod / staff?", a: "Want to join the team? Nice!\n1. Go to #Apply-for-mod in 'Support...' Section in Discord\n2. Start your application with Appy in private DMs\n3. Wait for it to be accepted or denied.\n\nP.S. Senior Moderator role is still EMPTY - you could be there! 👀" },
+{ keywords: ["command", "commands", "economy", "daily", "shop", "sell", "auction", "jobs", "coinflip", "cfz"], q: "Economy Commands?", a: "Here you go 💰\n/cfz [amount] - Coinflip (50/50 to double it) - Example: /cfz 100\n/daily - Daily reward\n/ah - Auction House\n/jobs - List of jobs to earn money\n/shop - Shop GUI\n/sell - Sell GUI" },
+{ keywords: ["teleport", "rtp", "lobby", "spawn", "tp"], q: "Teleport Commands?", a: "🗺️ TELEPORT:\n/rtp - Random teleport\n/lobby - Teleport to lobby\n/spawn - Teleport to spawn" },
+{ keywords: ["home", "homes", "base"], q: "Home Commands?", a: "🏠 HOMES:\n/home create [name] - Example: /home create base\n/homes - Shows all your homes\n/home delete [name] - Deletes that home" },
+{ keywords: ["warp", "pw", "player warp"], q: "Warp Commands?", a: "📍 PLAYER WARPS:\n/pw create [name] - Example: /pw create shop\n/pw [name] - Example: /pw shop\n/pw - Shows all player warps\n/pw delete [name] - Deletes your warp" },
+{ keywords: ["discord help", "discord commands", "bolt bot"], q: "Discord Help?", a: "💥 DISCORD HELP:\n@Bolt Bot AI - Chat with Bolt - Example: @Bolt hello\n/suggest - Submit suggestion - Example: /suggest add pvp\ntickets - Go in #create-a-ticket\napply for mod - Go in #Apply-for-mod\n/fun 8ball - Example: /fun 8ball will i win?\n/rate - Rate anything" },
+{ keywords: ["ip", "server ip", "address", "what is ip", "join ip"], q: "What is Server IP?", a: "So the IP is Not configured yet.\nWe are paused for Season 2 right now. The new IP will be shared on Discord + this website when Season 2 starts. Join Discord to get it first!" },
+{ keywords: ["join", "how to join", "how to play", "play minecraft", "connect", "multiplayer"], q: "How to join Minecraft?", a: "Super easy, chill:\n1. Open Minecraft\n2. Go to Multiplayer\n3. Click Add Server\n4. Paste our IP in IP bar (Not configured yet - coming in Season 2)\n5. Paste 'AdvaitMC' in Name bar\n6. Hit Enter and Play!\n\nFor Bedrock / Phone, ask me 'How to join on phone?'" },
+{ keywords: ["bedrock", "phone", "mobile", "pe", "pocket", "console", "xbox", "ps4", "ps5"], q: "How to join on Bedrock / Phone?", a: "For Bedrock / Phone:\n1. Go to Play\n2. Go to Servers\n3. Scroll down to Add Servers / My Servers\n4. Put IP [Not configured yet] in IP bar\n5. Put 'AdvaitMC' in Name bar\n6. Put Port as default\n7. Hit Save and Join!" },
+{ keywords: ["version", "which version", "what version", "1.21", "latest", "update"], q: "What version?", a: "We use the Latest Version.\nAnd we use special plugins so old version AND new version players can still join even if the server delays to be updated. So no worry about version, just join with what you have!" },
+{ keywords: ["gamemode", "gamemodes", "modes", "what can i play", "survival", "lifesteal", "skyblock", "oneblock", "parkour", "tnt", "head steal"], q: "What gamemodes?", a: "We have a lot:\n⚔️ Survival\n❤️ Lifesteal\n🧱 OneBlock\n☁️ SkyBlock\n🏃 Parkour\n💥 TNT Run\n💀 Head Steal" },
+{ keywords: ["money", "rich", "richest", "economy", "earn money", "giveaway", "giveaways"], q: "What is AdvaitMC about?", a: "Simple - earn money and be the richest player!\nWith giveaways and events, jobs, shops, auction house and more. Grind, trade, win events and climb to #1 richest!" },
+{ keywords: ["online", "is server online", "is server up", "is server down", "paused", "status"], q: "Is server online?", a: "Right now the server is PAUSED for Season 2 ⏸️\nWe are rebuilding everything bigger and better. Join Discord to know when it starts - you don't want to miss Day 1!" },
+{ keywords: ["what is advaitmc", "about advaitmc", "what is this", "project", "server about"], q: "What is AdvaitMC?", a: "AdvaitMC is a server offering multiple game modes with a fun community! 🎮\nSurvival, Lifesteal, OneBlock, SkyBlock, Parkour, TNT Run, Head Steal - all in one place." },
+{ keywords: ["why paused", "why is it paused", "why down", "why closed", "why offline"], q: "Why is server paused?", a: "We paused AdvaitMC to make our Season 2.\nWe want Season 2 to be way bigger and better, so we paused to rebuild everything properly." },
+{ keywords: ["season 2", "when season 2", "launch", "release", "when will it start", "when is season 2", "date"], q: "When is Season 2?", a: "🚀 SEASON 2 LAUNCH:\n📅 20/09/2027\n🕓 16:10 (4:10 PM)\n\nMark your calendar! Join Discord so you don't miss Day 1!" },
+{ keywords: ["whats new", "what is new", "new in season 2", "season 2 features", "paid perks", "perks", "ranks"], q: "What's new in Season 2?", a: "Season 2 is planning to offer:\n✨ Paid Perks\n🎮 More Game Modes\n🌍 A Wider Community\n\nBigger, better, and more fun than Season 1!" },
+{ keywords: ["will i lose", "keep money", "keep rank", "money reset", "rank reset", "will my rank", "will my money", "wipe", "reset"], q: "Will I lose my money / ranks?", a: "Good news!\nNo one's money or ranks will be removed till the launch of Season 2.\nYour progress is safe!" },
+{ keywords: ["trailer", "trailers", "sneak", "sneak peek", "sneak peak", "teaser", "preview"], q: "Where are trailers?", a: "Trailers will be dropped in our Discord server!\nGo to #sneak-peaks channel in 'Important' section.\nJoin Discord from the Info page on this website to see them first!" },
+{ keywords: ["who is advait", "owner", "founder", "theadvaitxd", "who made", "who created"], q: "Who is Advait?", a: "👑 Advait (TheAdvaitXD) is the Owner and Founder of AdvaitMC Empire.\nHe started everything." },
+{ keywords: ["who is foxy", "foxy", "manager"], q: "Who is Foxy?", a: "🦊 Foxy is our most trusted staff member with the role Manager.\nSecond in command, the person who keeps everything running." },
+{ keywords: ["liam", "larry", "liam_larry", "leo", "moderator", "moderators", "mods"], q: "Who are the Moderators?", a: "🛡️ Our Trusted Moderators:\n\n• Liam_Larry - Experienced Moderator\n• Leo - Experienced Moderator\n\nThey are the perfect people who can help you with any problem!" },
+{ keywords: ["dragon", "star", "trainee", "new staff", "staff members"], q: "Who are the new Staff?", a: "🌟 Our 2 New Staff:\n\n• Dragon - Trainee\n• Star - Trainee\n\nThey are still training but they are very sharp and good at what they do!" },
+{ keywords: ["team", "staff", "staff team", "who is staff", "admins", "hierarchy", "roles", "who runs"], q: "Who is the Team?", a: "👑 ADVAITMC TEAM:\n\n👑 Owner: Advait (TheAdvaitXD) - Founder of AdvaitMC Empire\n🦊 Manager: Foxy - Most trusted staff\n🛡️ Moderators: Liam_Larry + Leo - Experienced, here to help you\n🌟 Trainees: Dragon + Star - New, sharp, and learning fast\n\n⚠️ Senior Moderator role is still EMPTY - you could be there!\n\nAdmins: Foxy, Liam Larry, Leo, Star, Dragon" },
+{ keywords: ["senior", "senior moderator", "senior mod", "empty role", "vacancy"], q: "Senior Moderator?", a: "Senior Moderator role is still EMPTY! 👀\nThat could be YOU. Apply in #Apply-for-mod in Discord and prove yourself!" },
+{ keywords: ["event", "events", "tournament", "competition", "build battle", "pvp event"], q: "What events do you have?", a: "Yup, AdvaitMC does offer events!\nBut they are not always occasional - some can be sudden SURPRISE events! 👀\nKeep your eyes on #Giveaway and #Announcement in 'Important' category in Discord. All requirements will be there with the event." },
+{ keywords: ["how to join event", "join event", "sign up event", "event signup"], q: "How to join events?", a: "Easy - keep your eyes on #Giveaway and #Announcement in 'Important' category in Discord.\nAll the requirements will be provided there with the event. Just follow them!" },
+{ keywords: ["youtube", "yt", "channel", "videos", "social", "instagram", "tiktok"], q: "YouTube / Socials?", a: "📺 Our YouTube channel:\nGo to 'Info' category on this very website - top bar, 4th option - there you can get the link to our YouTube channel!" },
+{ keywords: ["suggest", "suggestion", "suggestions", "idea", "ideas", "suggest idea"], q: "How to suggest ideas?", a: "To suggest ideas:\n1. Go to any channel where you have permission to type in Discord\n2. Type /Suggest and hit Enter\n3. A form will pop up - fill in your idea there and hit Enter\n\nYour idea will go to the #Suggestion channel to be voted on!" },
+{ keywords: ["giveaway", "giveaways", "free", "prize", "prizes", "win"], q: "How to join giveaways?", a: "🎁 To join giveaways:\nGo to #Giveaway channel in our Discord in the Important category.\nAll the information on how to enter will be provided there itself. Good luck!" },
+{ keywords: ["announcement", "announcements", "news", "updates"], q: "Where are announcements?", a: "Keep your eyes on #Announcement channel in 'Important' category in Discord for all events, updates, and news!" },
+{ keywords: ["joke", "funny", "make me laugh", "tell me something funny"], q: "Tell me a joke", a: "Okay chill one 😄\n\nWhy did the Creeper go to therapy?\nBecause he had too many explosive emotions! 💥\n\nWant another? Just say 'another joke'" },
+{ keywords: ["another joke", "one more joke", "more joke"], q: "Another joke", a: "Haha okay 😄\n\nWhy is AdvaitMC the richest server?\nBecause even the Trainees are stacking diamonds while you are still looking for your home! /home create base 😂" },
+{ keywords: ["are you real", "are you ai", "are you human", "are you robot"], q: "Are you real AI?", a: "Haha, I'm AdvaitBot - chill helper bot for AdvaitMC.\nI'm not a big AI like ChatGPT, I just know everything about AdvaitMC. But I try my best to be chill like Advait 😎" },
+{ keywords: ["thank", "thanks", "thank you", "thx", "nice", "cool", "awesome", "great"], q: "Thanks", a: "Anytime! Chill 😎\nIf you need anything else about AdvaitMC, just ask me. And join Discord - that's where all the fun is!" },
+{ keywords: ["bye", "goodbye", "see you", "gtg"], q: "Bye", a: "See you! 👋\nCome back anytime. And don't forget - Season 2 is coming, stay ready!" },
+{ keywords: ["hi", "hello", "hey", "yo", "namaste", "hola"], q: "Hi", a: "Hey! 👋 Chill, I'm AdvaitBot.\nAsk me anything about AdvaitMC - How to Join, Season 2, Team, Events, Rules, or just ask me for a joke!" },
+{ keywords: ["who are you", "your name", "advaitbot"], q: "Who are you?", a: "I'm AdvaitBot! 🤖\nChill helper for AdvaitMC. I can help you with Minecraft, Discord, Season 2, Team, Events, Rules, Tickets, and Commands. All in easy language." }
+];
+const ADVAITBOT_JOKES = [
+  "Why did the Minecraft player bring a ladder to the bar? Because he heard the drinks were on the house! 😄",
+  "What do you call a fake noodle? An Impasta! ...okay that one wasn't Minecraft, my bad 😅",
+  "Why is /rtp the best command? Because even AdvaitBot doesn't know where you will land! 😂"
+];
+
+// ===== TOP BAR LOGIC - NEW =====
+function hideAdvaitBotTopBar(){
+  const bar = document.getElementById('advaitbot-topbar');
+  if(bar){ bar.classList.add('hidden'); document.body.classList.add('advaitbot-bar-hidden'); }
+}
+// Hide bar on ANY key press - even just Spacebar
+document.addEventListener('keydown', function(){
+  hideAdvaitBotTopBar();
+});
+// Also hide if they click the bot button
+const _origToggle = toggleAdvaitBot;
+
+function toggleAdvaitBot(){ const box=document.getElementById('advaitbot-box'); box.classList.toggle('open'); if(box.classList.contains('open') && document.getElementById('advaitbot-messages').innerHTML===''){ addAdvaitBotMsg("Hey! I'm AdvaitBot 🤖 Chill helper for AdvaitMC.\nAsk me anything - How to Join, Team, Events, Rules, or just say 'Tell me a joke'!", 'bot'); } }
+function addAdvaitBotMsg(text, who){ const div=document.createElement('div'); div.className='ab-msg ab-'+who; div.textContent=text; const box=document.getElementById('advaitbot-messages'); box.appendChild(div); box.scrollTop=box.scrollHeight; }
+function findAdvaitBotAnswer(input){
+  const lower=input.toLowerCase();
+  if(lower.includes("joke") || lower.includes("funny")){ return ADVAITBOT_JOKES[Math.floor(Math.random()*ADVAITBOT_JOKES.length)] + "\n\nWant another? Just say 'joke' again!"; }
+  let best=null, bestScore=0;
+  for(const item of ADVAITBOT_BRAIN){
+    let score=0;
+    for(const k of item.keywords){ if(lower.includes(k)) score+=k.length; }
+    if(score>bestScore){ bestScore=score; best=item; }
+  }
+  if(best) return best.a;
+  const offTopicWords = ["weather","cricket","football","math","homework","girlfriend","boyfriend","politics","movie","song","cooking","school"];
+  for(const w of offTopicWords){ if(lower.includes(w)) return "Your question should be related to AdvaitMC. If you think it was then we have saved it for improvement."; }
+  return "I do not have an appropriate answer for that question tho I have saved your question for improvement.\n\nTry asking about: How to Join, Season 2, Team, Events, Giveaways, Rules, Ticket, Mod, or Commands.";
+}
+function askAdvaitBot(text){ addAdvaitBotMsg(text,'user'); const ans=findAdvaitBotAnswer(text); setTimeout(()=>addAdvaitBotMsg(ans,'bot'),400); }
+function sendAdvaitBot(){ const inp=document.getElementById('advaitbot-input'); const text=inp.value.trim(); if(!text) return; inp.value=''; askAdvaitBot(text); }
+</script>
+<!-- ================= END ADVAITBOT FINAL v7 ================= -->
 </body>
 </html>
